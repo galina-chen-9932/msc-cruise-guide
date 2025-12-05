@@ -1,0 +1,306 @@
+/* ========================================================================= */
+/* I. 基礎設定與配色變數 (質感核心) */
+/* 確保功能、配色和質感都穩定 */
+/* ========================================================================= */
+
+:root {
+    /* 主色調：更飽和的暖棕色 (用於日期底線、時間點、圖示、左側邊線) */
+    --main-color: #a0522d; 
+
+    /* 淺色棕色：用於 EST. 2026 較淡的顏色 */
+    --main-color-light: #b89886; 
+    
+    /* 輔助背景色：柔和的淺米色 (用於卡片背景、附註底色、天氣卡片) */
+    --light-bg: #f5f0eb; 
+    
+    /* App整體背景色：更暖的米白色 (App 容器外層的底色) */
+    --app-bg: #f7f3ed;
+    
+    /* 文字色：深灰黑 (用於主標題 MSC 歐羅巴號郵輪、內文標題) */
+    --text-dark: #333;
+    
+    /* 次要文字色：柔和中灰 (用於內文細節) */
+    --text-muted: #777;
+    
+    /* 邊框線條色：更淡更細膩 (用於卡片邊框、頁面分隔線) */
+    --border-color: #e5e5e5;
+}
+/* 基礎設定：使用暖色調背景 */
+body {
+    font-family: 'Noto Serif TC', 'Times New Roman', Times, serif; 
+    background-color: var(--app-bg); /* <-- 使用暖調背景色 */
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.angkor-guide-app {
+    max-width: 420px;
+    margin: 0 auto;
+    background-color: #fff; /* App 內部內容區塊仍為白色 */
+    min-height: 100vh;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* 核心功能樣式：控制內容切換 (FIX: 這是不能遺漏的關鍵!) */
+.day-content.hidden {
+    display: none;
+}
+
+/* ========================================================================= */
+/* II. 頂部標題區與日期選單 (FINAL & PERFECT MATCH) */
+/* ========================================================================= */
+
+.app-header {
+    padding: 20px 20px 0 20px; 
+    background-color: #ffffff; 
+    border-bottom: 1px solid var(--border-color); 
+}
+
+/* 頂層 meta 資訊容器 (地中海 16 日啟航之旅 & EST. 2026) */
+.title-meta {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-bottom: 5px; 
+    position: relative;
+    top: -5px; 
+}
+
+/* 地中海 16 日啟航之旅 樣式 (頂層左側 - 棕色) */
+.meta-subtitle-cn {
+    font-size: 14px; /* 中文字體略大於英文，更易讀 */
+    color: var(--main-color); /* 棕色 */
+    letter-spacing: 1px; /* 增加中文字間距 */
+    margin: 0;
+    font-weight: 500;
+}
+
+/* 移除：舊的英文標題樣式 .meta-subtitle { display: none; } */
+
+/* EST. 2026 樣式 (頂層右側 - 淺棕色/灰色) */
+.est-date {
+    font-size: 13px;
+    color: var(--main-color-light); /* 淺棕色/灰色 */
+    margin: 0;
+    font-weight: 500;
+}
+
+.main-title-container {
+    margin-bottom: 15px;
+}
+
+/* 主標題樣式：MSC歐羅巴號郵輪 -> 深黑色、大字體 (FINAL) */
+.main-title {
+    font-family: 'Noto Serif TC', serif; 
+    font-size: 30px; /* 大字體，有份量感 */
+    font-weight: 600; 
+    color: var(--text-dark); /* 確保是深黑色/深灰色 (#333) */
+    margin: 0;
+    line-height: 1.1;
+    letter-spacing: 0; 
+}
+
+/* 日期選單 (保持不變) */
+.day-navigation {
+    display: flex;
+    gap: 15px;
+    margin-top: 0; 
+    overflow-x: auto; 
+    white-space: nowrap; 
+    padding-bottom: 10px; 
+    border-bottom: none; 
+}
+
+.day-navigation::-webkit-scrollbar {
+    display: none;
+}
+
+.day-num {
+    font-size: 20px;
+    color: #a0a0a0; 
+    cursor: pointer;
+    padding: 0 5px 5px 5px;
+    transition: color 0.3s;
+    font-weight: 400;
+}
+
+.day-num.active {
+    color: var(--main-color); 
+    border-bottom: 3px solid var(--main-color); 
+    font-weight: 600; 
+}
+/* ========================================================================= */
+/* III. 核心行程時間軸區 (卡片化與字重) */
+/* ========================================================================= */
+
+.timeline-container {
+    padding: 20px 25px;
+}
+
+/* 每天的日期標題 (2026/4/xx) */
+.section-title {
+    font-size: 18px;
+    color: var(--text-dark);
+    border-left: 4px solid var(--main-color); /* 側邊線條 */
+    padding-left: 10px;
+    margin-bottom: 30px;
+    font-weight: 600; 
+}
+
+/* 行程卡片基礎樣式 */
+.timeline-item {
+    display: flex;
+    margin-bottom: 25px;
+    padding: 15px 15px 15px 40px; 
+    margin-left: 10px;
+    background-color: #ffffff; 
+    border: 1px solid var(--border-color); 
+    border-radius: 8px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03); /* 柔和陰影 */
+    position: relative;
+}
+
+/* 繪製點與線條 */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    bottom: 30px; 
+    left: 10px;
+    width: 1px; 
+    background-color: #e5e5e5;
+    z-index: 5;
+}
+
+.timeline-item:last-child::after {
+    height: calc(100% - 20px); 
+    bottom: 5px;
+}
+
+.time-dot {
+    position: absolute;
+    left: 10px; 
+    top: 20px; 
+    width: 10px;
+    height: 10px;
+    background-color: var(--main-color); 
+    border-radius: 50%;
+    transform: translateX(-50%); 
+    border: 2px solid #fff; 
+    z-index: 10;
+}
+
+.time {
+    font-size: 13px;
+    color: var(--main-color); 
+    font-weight: 600; 
+    margin: 0 0 5px;
+}
+
+.activity-title {
+    font-size: 17px; 
+    font-weight: 600; /* <-- 加粗活動標題，符合質感 */
+    margin: 0 0 5px;
+    color: var(--text-dark);
+}
+
+.activity-title i {
+    color: var(--main-color); 
+    margin-right: 8px;
+}
+
+.detail, .note {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.note {
+    font-size: 12px;
+    color: var(--main-color); 
+    padding: 5px 10px;
+    margin-top: 10px; 
+    border-left: 3px solid var(--main-color);
+    background-color: var(--light-bg); /* <-- 附註使用淺米色背景 */
+    display: inline-block;
+    border-radius: 2px;
+    font-style: italic; 
+}
+
+
+/* ========================================================================= */
+/* IV. 資訊卡片樣式 (一致性調整) */
+/* ========================================================================= */
+
+.info-card-container {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.weather-card {
+    background-color: var(--light-bg); /* <-- 卡片背景使用淺米色 */
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color); 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--main-color); 
+}
+
+.ship-info-card {
+    background-color: var(--light-bg); /* <-- 卡片背景使用淺米色 */
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ship-info-card .info-line i {
+    color: var(--main-color); 
+}
+
+/* ========================================================================= */
+/* V. 底部導航列 */
+/* ========================================================================= */
+
+.day-content {
+    padding-bottom: 120px; 
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+    border-top: 1px solid var(--border-color);
+    position: fixed; 
+    bottom: 0;
+    width: 100%;
+    max-width: 420px; 
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #999;
+    font-size: 12px;
+    text-align: center;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+}
+
+.nav-item.active {
+    color: var(--main-color);
+    font-weight: bold;
+}
