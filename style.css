@@ -304,3 +304,44 @@ body {
     color: var(--main-color);
     font-weight: bold;
 }
+/* --- CSS for Day Tabs --- */
+
+/* 整個按鈕容器的樣式 */
+.day-tabs-container {
+    display: flex; /* 讓按鈕排成一列 */
+    overflow-x: auto; /* 如果按鈕太多，可以橫向捲動 */
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f8f8f8;
+    position: sticky; /* 讓按鈕固定在上方 */
+    top: 0;
+    z-index: 10;
+}
+
+/* 單個按鈕的樣式 */
+.day-tab-btn {
+    flex-shrink: 0; /* 防止按鈕被壓縮 */
+    padding: 8px 15px;
+    margin: 0 5px;
+    border: none;
+    background-color: #eee;
+    color: #333;
+    cursor: pointer;
+    border-radius: 20px; /* 圓角按鈕 */
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* 被選中的按鈕樣式 */
+.day-tab-btn.active {
+    background-color: #007bff; /* 藍色作為強調色 */
+    color: white;
+    font-weight: bold;
+}
+
+/* 滑鼠懸停效果 */
+.day-tab-btn:hover {
+    background-color: #ddd;
+}
