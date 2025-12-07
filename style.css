@@ -1,17 +1,16 @@
 /* ========================================================================= */
 /* I. 基礎設定與配色變數 (質感核心) */
-/* 確保功能、配色和質感都穩定 */
 /* ========================================================================= */
 
 :root {
     /* 主色調：更飽和的暖棕色 (用於日期底線、時間點、圖示、左側邊線) */
-    --main-color: #a0522d; 
+    --main-color: #a0522d;
 
     /* 淺色棕色：用於 EST. 2026 較淡的顏色 */
-    --main-color-light: #b89886; 
+    --main-color-light: #b89886;
     
     /* 輔助背景色：柔和的淺米色 (用於卡片背景、附註底色、天氣卡片) */
-    --light-bg: #f5f0eb; 
+    --light-bg: #f5f0eb;
     
     /* App整體背景色：更暖的米白色 (App 容器外層的底色) */
     --app-bg: #f7f3ed;
@@ -25,9 +24,10 @@
     /* 邊框線條色：更淡更細膩 (用於卡片邊框、頁面分隔線) */
     --border-color: #e5e5e5;
 }
+
 /* 基礎設定：使用暖色調背景 */
 body {
-    font-family: 'Noto Serif TC', 'Times New Roman', Times, serif; 
+    font-family: 'Noto Serif TC', 'Times New Roman', Times, serif;
     background-color: var(--app-bg); /* <-- 使用暖調背景色 */
     color: var(--text-dark);
     margin: 0;
@@ -41,48 +41,42 @@ body {
     background-color: #fff; /* App 內部內容區塊仍為白色 */
     min-height: 100vh;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    position: relative;
+    /* 確保底部不會被導航列擋住 */
+    padding-bottom: 70px; 
 }
 
-/* 核心功能樣式：控制內容切換 (FIX: 這是不能遺漏的關鍵!) */
-.day-content.hidden {
-    display: none;
-}
 
 /* ========================================================================= */
-/* II. 頂部標題區與日期選單 (FINAL & PERFECT MATCH) */
+/* II. 頂部標題區與日期選單 */
 /* ========================================================================= */
 
 .app-header {
-    padding: 20px 20px 0 20px; 
-    background-color: #ffffff; 
-    border-bottom: 1px solid var(--border-color); 
+    padding: 20px 20px 0 20px;
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border-color);
 }
 
-/* 頂層 meta 資訊容器 (地中海 16 日啟航之旅 & EST. 2026) */
 .title-meta {
     display: flex;
-    justify-content: space-between; 
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
     position: relative;
-    top: -5px; 
+    top: -5px;
 }
 
-/* 地中海 16 日啟航之旅 樣式 (頂層左側 - 棕色) */
 .meta-subtitle-cn {
-    font-size: 14px; /* 中文字體略大於英文，更易讀 */
-    color: var(--main-color); /* 棕色 */
-    letter-spacing: 1px; /* 增加中文字間距 */
+    font-size: 14px;
+    color: var(--main-color);
+    letter-spacing: 1px;
     margin: 0;
     font-weight: 500;
 }
 
-/* 移除：舊的英文標題樣式 .meta-subtitle { display: none; } */
-
-/* EST. 2026 樣式 (頂層右側 - 淺棕色/灰色) */
 .est-date {
     font-size: 13px;
-    color: var(--main-color-light); /* 淺棕色/灰色 */
+    color: var(--main-color-light);
     margin: 0;
     font-weight: 500;
 }
@@ -91,74 +85,102 @@ body {
     margin-bottom: 15px;
 }
 
-/* 主標題樣式：MSC歐羅巴號郵輪 -> 深黑色、大字體 (FINAL) */
-.main-title {
-    font-family: 'Noto Serif TC', serif; 
-    font-size: 30px; /* 大字體，有份量感 */
-    font-weight: 600; 
-    color: var(--text-dark); /* 確保是深黑色/深灰色 (#333) */
+/* 📌 新增：固定主標題 (郵輪名稱) 的樣式 */
+.fixed-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 30px; /* 維持大字體 */
+    font-weight: 600;
+    color: var(--text-dark);
     margin: 0;
     line-height: 1.1;
-    letter-spacing: 0; 
+    letter-spacing: 0;
+    margin-bottom: 10px; /* 增加與下方動態標題的間隔 */
 }
 
-/* 日期選單 (保持不變) */
-.day-navigation {
+/* 📌 調整：動態次標題 (Day XX) 的樣式 */
+/* 現在 H2 變成了 'main-title' 的類別 */
+.main-title {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 24px; /* 稍微小一點 */
+    font-weight: 500;
+    color: var(--text-dark);
+    margin: 0;
+    line-height: 1.1;
+    margin-bottom: 15px; /* 確保與 Day Tabs 有間隔 */
+}
+/* --- Day Tabs 容器樣式 --- */
+.day-tabs-container {
     display: flex;
-    gap: 15px;
-    margin-top: 0; 
-    overflow-x: auto; 
-    white-space: nowrap; 
-    padding-bottom: 10px; 
-    border-bottom: none; 
+    overflow-x: auto;
+    padding: 10px 10px; 
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    background-color: #f8f8f8;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 }
 
-.day-navigation::-webkit-scrollbar {
+/* 📌 修正：使用 JS 產生的 .day-tab 類別 */
+.day-tab {
+    flex-shrink: 0;
+    padding: 8px 15px;
+    margin-right: 10px;
+    border: none;
+    background-color: #eee;
+    color: #333;
+    cursor: pointer;
+    border-radius: 20px; /* 圓角按鈕 */
+    font-size: 14px;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+    text-decoration: none;
+}
+
+/* 📌 修正：被選中的按鈕樣式 */
+.day-tab.active {
+    background-color: var(--main-color);
+    color: white;
+    font-weight: bold;
+}
+
+/* 📌 修正：滑鼠懸停效果 */
+.day-tab:hover {
+    background-color: #ddd;
+}
+
+/* 隱藏滾動條 */
+.day-tabs-container::-webkit-scrollbar {
     display: none;
 }
 
-.day-num {
-    font-size: 20px;
-    color: #a0a0a0; 
-    cursor: pointer;
-    padding: 0 5px 5px 5px;
-    transition: color 0.3s;
-    font-weight: 400;
-}
 
-.day-num.active {
-    color: var(--main-color); 
-    border-bottom: 3px solid var(--main-color); 
-    font-weight: 600; 
-}
 /* ========================================================================= */
-/* III. 核心行程時間軸區 (卡片化與字重) */
+/* III. 核心行程時間軸區 */
 /* ========================================================================= */
 
 .timeline-container {
     padding: 20px 25px;
 }
 
-/* 每天的日期標題 (2026/4/xx) */
 .section-title {
     font-size: 18px;
     color: var(--text-dark);
-    border-left: 4px solid var(--main-color); /* 側邊線條 */
+    border-left: 4px solid var(--main-color);
     padding-left: 10px;
     margin-bottom: 30px;
-    font-weight: 600; 
+    font-weight: 600;
 }
 
-/* 行程卡片基礎樣式 */
 .timeline-item {
     display: flex;
     margin-bottom: 25px;
-    padding: 15px 15px 15px 40px; 
+    padding: 15px 15px 15px 40px;
     margin-left: 10px;
-    background-color: #ffffff; 
-    border: 1px solid var(--border-color); 
-    border-radius: 8px; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03); /* 柔和陰影 */
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.03);
     position: relative;
 }
 
@@ -167,47 +189,47 @@ body {
     content: '';
     position: absolute;
     top: 5px;
-    bottom: 30px; 
+    bottom: 30px;
     left: 10px;
-    width: 1px; 
+    width: 1px;
     background-color: #e5e5e5;
     z-index: 5;
 }
 
 .timeline-item:last-child::after {
-    height: calc(100% - 20px); 
+    height: calc(100% - 20px);
     bottom: 5px;
 }
 
 .time-dot {
     position: absolute;
-    left: 10px; 
-    top: 20px; 
+    left: 10px;
+    top: 20px;
     width: 10px;
     height: 10px;
-    background-color: var(--main-color); 
+    background-color: var(--main-color);
     border-radius: 50%;
-    transform: translateX(-50%); 
-    border: 2px solid #fff; 
+    transform: translateX(-50%);
+    border: 2px solid #fff;
     z-index: 10;
 }
 
 .time {
     font-size: 13px;
-    color: var(--main-color); 
-    font-weight: 600; 
+    color: var(--main-color);
+    font-weight: 600;
     margin: 0 0 5px;
 }
 
 .activity-title {
-    font-size: 17px; 
-    font-weight: 600; /* <-- 加粗活動標題，符合質感 */
+    font-size: 17px;
+    font-weight: 600;
     margin: 0 0 5px;
     color: var(--text-dark);
 }
 
 .activity-title i {
-    color: var(--main-color); 
+    color: var(--main-color);
     margin-right: 8px;
 }
 
@@ -219,41 +241,70 @@ body {
 
 .note {
     font-size: 12px;
-    color: var(--main-color); 
+    color: var(--main-color);
     padding: 5px 10px;
-    margin-top: 10px; 
+    margin-top: 10px;
     border-left: 3px solid var(--main-color);
-    background-color: var(--light-bg); /* <-- 附註使用淺米色背景 */
+    background-color: var(--light-bg);
     display: inline-block;
     border-radius: 2px;
-    font-style: italic; 
+    font-style: italic;
 }
 
 
 /* ========================================================================= */
-/* IV. 資訊卡片樣式 (一致性調整) */
+/* IV. 資訊卡片樣式 (新增地圖連結樣式) */
 /* ========================================================================= */
 
-.info-card-container {
+/* 地圖連結卡片的容器，讓它看起來像其他資訊卡 */
+.map-link-card {
+    /* 與其他卡片保持距離 */
+    margin-bottom: 15px; 
+}
+
+.map-link-card .map-link {
     display: flex;
-    flex-direction: column; 
-    gap: 15px;
-    margin-bottom: 30px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: var(--light-bg);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    /* 給予輕微的邊框 */
+    border: 1px solid var(--border-color); 
+    transition: background-color 0.2s;
 }
 
+.map-link-card .map-link:hover {
+    background-color: #e6e0db; /* 滑鼠懸停時顏色稍深 */
+}
+
+/* 確保地圖圖示使用主色調 */
+.map-link-card .map-link i {
+    color: var(--main-color);
+    margin-right: 10px;
+    font-size: 16px;
+}
+/* 讓右側的箭頭圖示稍微分開 */
+.map-link-card .map-link .fa-chevron-right {
+    margin-left: auto;
+    margin-right: 0;
+}
 .weather-card {
-    background-color: var(--light-bg); /* <-- 卡片背景使用淺米色 */
+    background-color: var(--light-bg);
     padding: 15px;
     border-radius: 8px;
-    border: 1px solid var(--border-color); 
+    border: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     gap: 10px;
-    color: var(--main-color); 
+    color: var(--main-color);
 }
 
 .ship-info-card {
-    background-color: var(--light-bg); /* <-- 卡片背景使用淺米色 */
+    background-color: var(--light-bg);
     padding: 15px;
     border-radius: 8px;
     border: 1px solid var(--border-color);
@@ -263,85 +314,47 @@ body {
 }
 
 .ship-info-card .info-line i {
-    color: var(--main-color); 
+    color: var(--main-color);
 }
 
+
 /* ========================================================================= */
-/* V. 底部導航列 */
+/* V. 底部導航列 (bottom-nav) */
 /* ========================================================================= */
 
-.day-content {
-    padding-bottom: 120px; 
-}
-
-.footer-nav {
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 420px;
+    height: 60px;
+    background-color: #f7f7f7;
     display: flex;
     justify-content: space-around;
-    padding: 10px 0;
-    border-top: 1px solid var(--border-color);
-    position: fixed; 
-    bottom: 0;
-    width: 100%;
-    max-width: 420px; 
-    margin: 0 auto;
-    background-color: #fff;
+    align-items: center;
+    border-top: 1px solid #ddd;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
 }
 
-.nav-item {
-    text-decoration: none;
-    color: #999;
-    font-size: 12px;
-    text-align: center;
-    padding: 5px;
+.bottom-nav .nav-item {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3px;
+    text-decoration: none;
+    color: #888;
+    font-size: 12px;
+    padding: 5px;
+    flex-grow: 1;
 }
 
-.nav-item.active {
-    color: var(--main-color);
+.bottom-nav .nav-item i {
+    font-size: 20px;
+    margin-bottom: 3px;
+}
+
+.bottom-nav .nav-item.active {
+    color: var(--main-color); /* 棕色 */
     font-weight: bold;
-}
-/* --- CSS for Day Tabs --- */
-
-/* 整個按鈕容器的樣式 */
-.day-tabs-container {
-    display: flex; /* 讓按鈕排成一列 */
-    overflow-x: auto; /* 如果按鈕太多，可以橫向捲動 */
-    padding: 10px 0;
-    margin-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-    background-color: #f8f8f8;
-    position: sticky; /* 讓按鈕固定在上方 */
-    top: 0;
-    z-index: 10;
-}
-
-/* 單個按鈕的樣式 */
-.day-tab-btn {
-    flex-shrink: 0; /* 防止按鈕被壓縮 */
-    padding: 8px 15px;
-    margin: 0 5px;
-    border: none;
-    background-color: #eee;
-    color: #333;
-    cursor: pointer;
-    border-radius: 20px; /* 圓角按鈕 */
-    font-size: 14px;
-    font-weight: 500;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-/* 被選中的按鈕樣式 */
-.day-tab-btn.active {
-    background-color: #007bff; /* 藍色作為強調色 */
-    color: white;
-    font-weight: bold;
-}
-
-/* 滑鼠懸停效果 */
-.day-tab-btn:hover {
-    background-color: #ddd;
 }

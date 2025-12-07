@@ -1,93 +1,147 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // 總天數
-    const totalDays = 16;
-    // 行程內容區容器
-    const contentContainer = document.querySelector('.timeline-container');
-    // 建立日期的 Tab 容器 (假設你的 HTML 中已經有 <div id="day-tabs"></div>)
-    // 如果你沒有這個容器，請在 HTML 的行程區塊上方加上 <div id="day-tabs" class="day-tabs-container"></div>
-    const tabContainer = document.getElementById('day-tabs');
+// 定義行程日期的範圍，用於產生 Day Tab
+const totalDays = 16; // 📌 請將這個數字從 12 改成 16
+const tabContainer = document.getElementById('day-tabs');
+const dayContents = document.querySelectorAll('.day-content');
+const bottomNavItems = document.querySelectorAll('.bottom-nav .nav-item');
 
-    // 1. 檢查 Tab 容器是否存在
-    if (!tabContainer) {
-        console.error('Missing #day-tabs container in HTML. Please add <div id="day-tabs" class="day-tabs-container"></div>');
-        return; // 如果沒有容器，則停止執行
-    }
+// 預設要顯示的頁面 ID
+const defaultPageId = 'day-01';
 
-    // 2. 動態生成 Tab 按鈕
+/**
+ * 1. 動態產生 Day Tabs 標籤
+ */
+function createDayTabs() {
     for (let i = 1; i <= totalDays; i++) {
-        const dayId = `day-${i.toString().padStart(2, '0')}`;
-        const button = document.createElement('button');
-        button.className = 'day-tab-btn';
-        button.id = `tab-${dayId}`;
-        button.textContent = `Day ${i}`;
-        button.setAttribute('data-day-id', dayId);
-        tabContainer.appendChild(button);
-    }
+        // 格式化數字為兩位數 (01, 02, ...)
+        const dayNumber = String(i).padStart(2, '0');
+        const dayId = `day-${dayNumber}`;
 
-    // 3. 處理 Tab 點擊事件
-    tabContainer.addEventListener('click', function(event) {
-        const button = event.target.closest('.day-tab-btn');
-        if (button) {
-            const targetDayId = button.getAttribute('data-day-id');
-            showDayContent(targetDayId);
+        const tab = document.createElement('a');
+        tab.href = `#${dayId}`;
+        tab.classList.add('day-tab');
+        tab.dataset.page = dayId; // 用於後續點擊事件識別
+        tab.textContent = `Day ${dayNumber}`;
+
+        // 設定預設活躍狀態：如果 ID 匹配預設頁面，則設定 active
+        if (dayId === defaultPageId) {
+            tab.classList.add('active');
         }
+
+        tabContainer.appendChild(tab);
+    }
+}
+
+
+/**
+ * 2 & 3. 處理頁面切換邏輯 (包括 Day Tabs 和 Bottom Nav)
+ * @param {string} targetPageId - 目標頁面的 ID (例如: 'day-05' 或 'page-explore')
+ */
+function switchPage(targetPageId) {
+    // 隱藏所有內容頁面
+    dayContents.forEach(content => {
+        content.style.display = 'none';
     });
 
-    /**
-     * 顯示特定日期的內容
-     * @param {string} targetDayId - 格式為 'day-01' 到 'day-16'
-     */
-    function showDayContent(targetDayId) {
-        // 隱藏所有行程內容
-        const allContents = document.querySelectorAll('.day-content');
-        allContents.forEach(content => {
-            content.style.display = 'none';
+    // 顯示目標內容頁面
+    const targetContent = document.getElementById(targetPageId);
+    if (targetContent) {
+        targetContent.style.display = 'block';
+
+        // 滾動到頁面頂部
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
 
-        // 移除所有按鈕的 active 樣式
-        const allTabs = document.querySelectorAll('.day-tab-btn');
-        allTabs.forEach(tab => {
-            tab.classList.remove('active');
+        // 更新 Header 標題 
+        updateHeaderTitle(targetPageId);
+    }
+}
+
+/**
+ * 處理 Tab 標籤和導航列的點擊事件，並更新 active 狀態
+ * @param {HTMLElement} element - 被點擊的元素 (Day Tab 或 Nav Item)
+ */
+function handleNavigation(element) {
+    const targetPageId = element.dataset.page;
+
+    // 移除所有 Day Tabs 的 active 狀態
+    document.querySelectorAll('.day-tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+
+    // 移除所有 Bottom Nav Items 的 active 狀態
+    bottomNavItems.forEach(item => {
+        item.classList.remove('active');
+    });
+
+    // 判斷目標頁面 ID 是否為 Day Content (例如 'day-05')
+    const isDayContent = targetPageId.startsWith('day-');
+
+    if (isDayContent) {
+        // 如果是行程日，則更新對應的 Day Tab 狀態
+        const dayTab = document.querySelector(`.day-tab[data-page="${targetPageId}"]`);
+        if (dayTab) {
+            dayTab.classList.add('active');
+        }
+        // 將底部導航的「行程」按鈕設為 active (因為行程按鈕的 data-page 是 "day-05")
+        document.querySelector('.bottom-nav .nav-item[data-page="day-05"]').classList.add('active');
+
+    } else {
+        // 如果是功能頁面 (探索/筆記/指南)，則更新對應的 Bottom Nav Item 狀態
+        element.classList.add('active');
+    }
+
+    // 切換內容頁面
+    switchPage(targetPageId);
+}
+
+/**
+ * 更新動態次標題 (H2)
+ * @param {string} pageId - 當前頁面的 ID
+ */
+function updateHeaderTitle(pageId) {
+    // 獲取新的動態次標題元素
+    const dynamicSubtitle = document.getElementById('dynamic-subtitle');
+    let newTitle = ""; // 預設為空，避免顯示不必要的文字
+
+    if (pageId.startsWith('day-')) {
+        const dayNum = pageId.split('-')[1];
+        newTitle = `地中海啟航 - Day ${dayNum}`; // 顯示 '地中海啟航 - Day 01'
+    } else if (pageId === 'page-explore') {
+        newTitle = "探索地圖與景點";
+    } else if (pageId === 'page-notes') {
+        newTitle = "我的筆記與備忘錄";
+    } else if (pageId === 'page-guide') {
+        newTitle = "旅遊指南與資訊";
+    }
+
+    dynamicSubtitle.textContent = newTitle; // 只更新這個 H2 元素
+}
+
+/**
+ * 應用程式啟動入口
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. 產生 Day Tabs
+    createDayTabs();
+
+    // 2. 設置 Day Tabs 的點擊事件監聽器
+    document.querySelectorAll('.day-tab').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            e.preventDefault();
+            handleNavigation(e.currentTarget);
         });
+    });
 
-        // 顯示目標行程內容並讓它捲動到頂部
-        const targetContent = document.getElementById(targetDayId);
-        if (targetContent) {
-            targetContent.style.display = 'block';
-            // 可選：讓頁面捲動到行程內容的上方
-            // targetContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+    // 3. 設置 Bottom Nav 的點擊事件監聽器
+    bottomNavItems.forEach(item => {
+        item.addEventListener('click', (e) => {
+            e.preventDefault();
+            handleNavigation(e.currentTarget);
+        });
+    });
 
-        // 為目標按鈕增加 active 樣式
-        const targetTab = document.getElementById(`tab-${targetDayId}`);
-        if (targetTab) {
-            targetTab.classList.add('active');
-        }
-    }
-
-    // 4. 初始化：根據今天的日期決定顯示哪個行程
-
-    // 假設行程的開始日期是 2026/4/09
-    const startDate = new Date('2026-04-09');
-    const today = new Date();
-    // 將今天和開始日期都設為午夜，確保日期計算準確
-    startDate.setHours(0, 0, 0, 0);
-    today.setHours(0, 0, 0, 0);
-
-    // 計算兩日期的毫秒差
-    const timeDiff = today.getTime() - startDate.getTime();
-    // 將毫秒差轉換為天數
-    const dayDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-
-    // 計算應該顯示第幾天 (Day 1 是 dayDiff = 0)
-    let currentDayIndex = dayDiff + 1;
-
-    // 確保索引在 1 到 totalDays 之間
-    if (currentDayIndex < 1 || currentDayIndex > totalDays) {
-        // 如果不在行程日期內，則預設顯示 Day 1
-        currentDayIndex = 1;
-    }
-
-    const initialDayId = `day-${currentDayIndex.toString().padStart(2, '0')}`;
-    showDayContent(initialDayId);
+    // 4. 首次載入時，顯示預設頁面 (Day 05)
+    switchPage(defaultPageId);
 });

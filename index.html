@@ -10,28 +10,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&display=swap" rel="stylesheet">
-
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 <body>
-    <div class="angkor-guide-app">
-     <header class="app-header">
-    <div class="title-meta">
-        <p class="meta-subtitle-cn">地中海 16 日啟航之旅</p>
-        <p class="est-date">EST. 2026</p>
-    </div>
     
-    <div class="main-title-container">
-        <h1 class="main-title">MSC歐羅巴號郵輪</h1>
-    </div>
+    <div class="angkor-guide-app">
+        
+        <header class="app-header">
+            <div class="title-meta">
+                <p class="meta-subtitle-cn">MSC World Europa</p>
+                <p class="est-date">EST. 2026</p>
+            </div>
+            
+            <div class="main-title-container">
+    <h1 class="fixed-title">MSC歐羅巴號郵輪初體驗</h1> 
+    <h2 id="dynamic-subtitle" class="main-title"></h2> 
+</div>
+        </header>
 
-    </header>
-<main class="timeline-container">
+        <div id="day-tabs" class="day-tabs-container"></div>
+        
+        <main class="timeline-container">
 
-    <div id="day-tabs" class="day-tabs-container">
-        </div>
-
-    <div id="day-01" class="day-content" style="display: block;">
+         <div id="day-01" class="day-content" style="display: none;">
         <h2 class="section-title">2026/4/09 Thu</h2>
         <div class="info-card-container">
             <div class="weather-card">
@@ -202,182 +205,7 @@
             </div>
         </div>
     </div>
-        <main class="timeline-container">
-
-<div id="day-tabs" class="day-tabs-container">
-    </div>
-
-<div id="day-01" class="day-content" style="display: block;">
-    <h2 class="section-title">2026/4/09 Thu</h2>
-    <div class="info-card-container">
-        <div class="weather-card">
-            <i class="fa-solid fa-plane"></i>
-            <span class="temp">航班：EY853 (TPE) + EY83 (AUH)</span>
-            <span class="desc">台北TPE → 阿布達比AUH → 羅馬FCO</span>
-            <span class="location">空中</span>
-        </div>
-        <div class="map-link-card">
-            <i class="fa-solid fa-clipboard-list"></i>
-            <span class="text">TPE 21:30 | AUH 00:00+1 | FCO 06:40+1</span>
-            <i class="fa-solid fa-chevron-right"></i>
-        </div>
-    </div>
-    <div class="timeline-item">
-        <div class="time-dot"></div>
-        <div class="content">
-            <p class="time">預計 18:30</p>
-            <h3 class="activity-title"><i class="fa-solid fa-plane-departure"></i> 前往台北桃園機場</h3>
-            <p class="detail">預留充足時間辦理登機與托運。請確認行李重量限制。</p>
-        </div>
-    </div>
-    <div class="timeline-item">
-        <div class="time-dot"></div>
-        <div class="content">
-            <p class="time">21:30 (TPE)</p>
-            <h3 class="activity-title"><i class="fa-solid fa-bed"></i> 登機與跨夜飛行</h3>
-            <p class="detail">航班 EY853。座位：[待確認]。準備在阿布達比 (AUH) 進行中轉。</p>
-            <p class="note"><i class="fa-solid fa-weight-hanging"></i> 行李限制：[待確認] 公斤。</p>
-        </div>
-    </div>
-</div>
-
-<div id="day-02" class="day-content" style="display: none;">
-    <h2 class="section-title">2026/4/10 Fri</h2>
-    <div class="info-card-container">
-        <div class="weather-card">
-            <i class="fa-solid fa-plane-arrival"></i>
-            <span class="temp">14°C - 23°C</span>
-            <span class="desc">清晨抵達羅馬FCO</span>
-            <span class="location">羅馬FCO機場</span>
-        </div>
-        <div class="ship-info-card">
-            <div class="info-line">
-                <i class="fa-solid fa-key"></i>
-                <span class="label">羅馬飯店:</span>
-                <span class="value">[羅馬市區飯店名稱]</span>
-            </div>
-            <div class="info-line">
-                <i class="fa-solid fa-location-dot"></i>
-                <span class="label">地址:</span>
-                <span class="value">[飯店地址]</span>
-            </div>
-        </div>
-    </div>
-    <div class="timeline-item">
-        <div class="time-dot"></div>
-        <div class="content">
-            <p class="time">預計 06:40</p>
-            <h3 class="activity-title"><i class="fa-solid fa-car-side"></i> 羅馬FCO機場抵達與通關</h3>
-            <p class="detail">航班 EY83。清晨抵達羅馬，辦理通關手續，領取行李。</p>
-        </div>
-    </div>
-    <div class="timeline-item">
-        <div class="time-dot"></div>
-        <div class="content">
-            <p class="time">08:30 - 10:30</p>
-            <h3 class="activity-title"><i class="fa-solid fa-hotel"></i> 搭乘 Shuttle Bus 前往飯店 Check-in</h3>
-            <p class="detail">搭乘接駁巴士前往市區飯店，辦理入住手續（可能需要先寄放行李）。</p>
-            <p class="note"><i class="fa-solid fa-bed"></i> 建議在飯店稍作休息，以適應時差。</p>
-        </div>
-    </div>
-    <div class="timeline-item">
-        <div class="time-dot"></div>
-        <div class="content">
-            <p class="time">11:30 - 15:00</p>
-            <h3 class="activity-title"><i class="fa-solid fa-utensils"></i> 市區覓食與散步</h3>
-            <p class="detail">在飯店附近尋找午餐，逛逛周邊景點，熟悉羅馬市區環境。</p>
-        </div>
-    </div>
-</div>
-
-<div id="day-03" class="day-content" style="display: none;">
-    <h2 class="section-title">2026/4/11 Sat</h2>
-    <div class="info-card-container">
-        <div class="weather-card">
-            <i class="fa-solid fa-cloud-sun"></i>
-            <span class="temp">11°C - 18°C</span>
-            <span class="desc">多雲轉晴 · 適合遊覽</span>
-            <span class="location">羅馬市區</span>
-        </div>
-        <div class="ship-info-card">
-            <div class="info-line">
-                <i class="fa-solid fa-hotel"></i>
-                <span class="label">飯店:</span>
-                <span class="value">[羅馬市區飯店名稱]</span>
-            </div>
-            <div class="info-line">
-                <i class="fa-solid fa-utensils"></i>
-                <span class="label">早餐:</span>
-                <span class="value">07:00 - 10:00 (飯店內)</span>
-            </div>
-        </div>
-    </div>
-    <div class="timeline-item">
-        <div class="time-dot"></div>
-        <div class="content">
-            <p class="time">09:00 - 17:00</p>
-            <h3 class="activity-title"><i class="fa-solid fa-gopuram"></i> 羅馬市區遊覽舊地重遊</h3>
-            <p class="detail">飯店用完早餐後，前往您感興趣的羅馬經典景點進行遊覽，如梵蒂岡、競技場、許願池等。</p>
-            <p class="note"><i class="fa-solid fa-map"></i> 建議準備好步行路線圖。</p>
-        </div>
-    </div>
-    <div class="timeline-item">
-        <div class="time-dot"></div>
-        <div class="content">
-            <p class="time">18:00 - 20:00</p>
-            <h3 class="activity-title"><i class="fa-solid fa-box"></i> 準備行李與晚餐</h3>
-            <p class="detail">回到飯店打包行李，為明天的移動做好準備。在羅馬享用最後的晚餐。</p>
-        </div>
-    </div>
-</div>
-
-<div id="day-04" class="day-content" style="display: none;">
-    <h2 class="section-title">2026/4/12 Sun</h2>
-    <div class="info-card-container">
-        <div class="weather-card">
-            <i class="fa-solid fa-sun"></i>
-            <span class="temp">14°C - 23°C</span>
-            <span class="desc">晴朗 · 適合移動</span>
-            <span class="location">奇維塔韋基亞 (Civitavecchia)</span>
-        </div>
-        <div class="ship-info-card">
-            <div class="info-line">
-                <i class="fa-solid fa-key"></i>
-                <span class="label">港口飯店:</span>
-                <span class="value">[奇維塔韋基亞飯店名稱]</span>
-            </div>
-            <div class="info-line">
-                <i class="fa-solid fa-train"></i>
-                <span class="label">火車資訊:</span>
-                <span class="value">羅馬 Termini → Civitavecchia</span>
-            </div>
-        </div>
-    </div>
-    <div class="timeline-item">
-        <div class="time-dot"></div>
-        <div class="content">
-            <p class="time">09:00 - 11:00</p>
-            <h3 class="activity-title"><i class="fa-solid fa-house-user"></i> 飯店用早餐與 Check-out</h3>
-            <p class="detail">在羅馬飯店用早餐，並辦理退房手續。</p>
-        </div>
-    </div>
-    <div class="timeline-item">
-        <div class="time-dot"></div>
-        <div class="content">
-            <p class="time">11:00 - 14:00</p>
-            <h3 class="activity-title"><i class="fa-solid fa-train-subway"></i> 搭乘火車前往 Civitavecchia</h3>
-            <p class="detail">搭乘火車前往登船港口城市奇維塔韋基亞。請注意火車班次與時間。</p>
-        </div>
-    </div>
-    <div class="timeline-item">
-        <div class="time-dot"></div>
-        <div class="content">
-            <p class="time">14:30 - 17:00</p>
-            <h3 class="activity-title"><i class="fa-solid fa-bed"></i> 港口飯店 Check-in 與市區覓食</h3>
-            <p class="detail">在奇維塔韋基亞入住飯店，接著在港口市區逛逛並覓食晚餐。</p>
-        </div>
-    </div>
-</div>
+       
 
 <div id="day-05" class="day-content" style="display: none;">
     <h2 class="section-title">2026/4/13 Mon</h2>
@@ -939,63 +767,40 @@
     </div>
 </div>
 
+            <div id="page-explore" class="day-content" style="display: none;">
+                <h2 class="section-title">🗺️ 探索地圖與景點</h2>
+                <p>此頁面用於展示您在每個停靠港的推薦景點、地圖連結或預訂資訊。</p>
+            </div>
+            <div id="page-notes" class="day-content" style="display: none;">
+                <h2 class="section-title">📝 我的筆記與備忘錄</h2>
+                <p>此頁面用於記錄您在旅途中的筆記、購物清單或重要提醒。</p>
+            </div>
+            <div id="page-guide" class="day-content" style="display: none;">
+                <h2 class="section-title">ℹ️ 旅遊指南與資訊</h2>
+                <p>此頁面用於存放郵輪 Wi-Fi 密碼、船上電話號碼、緊急聯絡人等重要資訊。</p>
+            </div>
+
         </main>
         
-        <footer class="footer-nav">
-            <a href="#" class="nav-item active">
+        <nav class="bottom-nav">
+            <a href="#" class="nav-item" data-page="day-05">
                 <i class="fa-solid fa-route"></i>
                 <span>行程</span>
             </a>
-            <a href="#" class="nav-item">
-                <i class="fa-solid fa-compass"></i>
+            <a href="#" class="nav-item" data-page="page-explore">
+                <i class="fa-solid fa-magnifying-glass"></i>
                 <span>探索</span>
             </a>
-            <a href="#" class="nav-item">
-                <i class="fa-solid fa-book-open"></i>
+            <a href="#" class="nav-item" data-page="page-notes">
+                <i class="fa-solid fa-book"></i>
                 <span>筆記</span>
             </a>
-            <a href="#" class="nav-item">
+            <a href="#" class="nav-item" data-page="page-guide">
                 <i class="fa-solid fa-circle-info"></i>
                 <span>指南</span>
             </a>
-        </footer>
-    </div>
-
-<script>
-    // 獲取所有的日期切換按鈕
-    const dayButtons = document.querySelectorAll('.day-navigation .day-num');
-    // 獲取所有的行程內容區塊
-    const dayContents = document.querySelectorAll('.day-content');
-
-    // 處理點擊事件的函數
-    function handleDayChange(event) {
-        const selectedDay = event.target.getAttribute('data-day');
+        </nav>
         
-        // 1. 處理按鈕的樣式：移除所有按鈕的 active 狀態，並賦予點擊的按鈕 active
-        dayButtons.forEach(button => {
-            button.classList.remove('active');
-        });
-        event.target.classList.add('active');
-
-        // 2. 處理內容的顯示：隱藏所有內容區塊，然後顯示被選中日期的內容
-        dayContents.forEach(content => {
-            content.classList.add('hidden'); // 先隱藏所有內容
-        });
-
-        // 顯示對應的內容區塊 (例如：如果點擊 Day 06，就顯示 id="day-06-content")
-        const targetContent = document.getElementById(`day-${selectedDay}-content`);
-        if (targetContent) {
-            targetContent.classList.remove('hidden');
-        }
-    }
-
-    // 將事件監聽器加到每個按鈕上
-    dayButtons.forEach(button => {
-        button.addEventListener('click', handleDayChange);
-    });
-
-</script>
-<script src="script.js"></script>
-
+    </div> <script src="script.js"></script>
 </body>
 </html>
